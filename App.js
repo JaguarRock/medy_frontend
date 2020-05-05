@@ -58,8 +58,7 @@ export default function App(props) {
     );
   }
 }
-//oh
-
+//ddd
 const styles = StyleSheet.create({
   container: {
     flex: 1,
