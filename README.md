@@ -2,8 +2,8 @@
 
 ## Motivation
 
-SW Startup Challenge
-종합설계프로젝트
+1. SW Startup Challenge
+2. 종합설계프로젝트
 
 ## Enviroment
 
