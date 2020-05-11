@@ -1,0 +1,19 @@
+{
+    "medicineBags": [
+        {
+            "id": 1,
+            "medicineBagname": "cold",
+            "medicineConsist": "aspirin 1"
+        },
+        {
+            "id": 2,
+            "medicineBagname": "corona",
+            "medicineConsist": "vaccine 1"
+        },
+        {
+            "id": 3,
+            "medicineBagname": "influenza",
+            "medicineConsist": "tamiflu 1"
+        }
+    ]
+}
