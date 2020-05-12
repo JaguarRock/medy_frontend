@@ -9,7 +9,6 @@ const dataReducer = (state = dataState, action) => {
             let { medicineBag } = action.data;
             let clone = JSON.parse(JSON.stringify(state.medicineBags));
             clone.unshift(medicineBag);
-
             return { ...state, medicineBags: clone};
         
         case MEDICINEBAG_AVAILABLE:

@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {AsyncStorage, View, ActivityIndicator, StyleSheet} from 'react-native';
 
 import MedicineSample from '../../medicineBag.json';
+import { AppLoading } from 'expo';
 
 export default function LoadingMedicineBag(props) {
     useEffect(() => checkLocalData(), []);
@@ -17,9 +18,5 @@ export default function LoadingMedicineBag(props) {
         });
     }
 
-    return (
-        <View>
-            <ActivityIndicator animating={true}/>
-        </View>
-    );
+    return <AppLoading/>
 }

@@ -43,13 +43,14 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
         <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
             <RightActions progress={progress} dragX={dragX} item={item} />
         )}>
+            {console.log(item)}
             <View>
                 <View>
                     <Text>
-                        {item.medicineBagname}
+                        {item.bagName}
                     </Text>
                     <Text>
-                        {item.medicineConsist}
+                        {item.bagConsist}
                     </Text>
                 </View>
             </View>
