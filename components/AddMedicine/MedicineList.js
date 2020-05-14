@@ -27,7 +27,7 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
                 </RectButton>
                 <RectButton onPress={() => {
                     inputEl.current.close();
-                    onDelete(item.id)
+                    onDelete(item._id)
                 }}>
                     <View>
                         <Animated.Text>
@@ -43,7 +43,6 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
         <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
             <RightActions progress={progress} dragX={dragX} item={item} />
         )}>
-            {console.log(item)}
             <View>
                 <View>
                     <Text>

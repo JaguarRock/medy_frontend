@@ -26,11 +26,11 @@ const dataReducer = (state = dataState, action) => {
         }
 
         case DELETE_MEDICINEBAG: {
-            let { id } = action.data;
+            let { _id } = action.data;
 
             let clone = JSON.parse(JSON.stringify(state.medicineBags));
 
-            const index = clone.findIndex((obj) => obj.id === id);
+            const index = clone.findIndex((obj) => obj._id === _id);
             if (index !== -1) clone.splice(index, 1);
 
             return {...state, medicineBags: clone};
