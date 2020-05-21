@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import store from "./store/store";
-import Router from "./components/index";
 import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import MainScreen from "./components/MainScreen"
 
 export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router />
+        <NavigationContainer>
+          <MainScreen />
+        </NavigationContainer>
       </Provider>
     )
   }

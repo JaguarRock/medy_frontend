@@ -71,8 +71,6 @@ export default function MedicineScreen(props) {
             .finally(() => setIsFetching(false));
     }
 
-
-
     return (
         <SafeAreaView>
             <FlatList
