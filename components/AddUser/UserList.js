@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Animated } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-function MedicineList ({item, index, navigation, onDelete, onEdit}) {
+function UserList ({item, onDelete, onEdit}) {
     const inputEl = useRef(null);
 
     const RightActions = ({ progress, dragX, onPress, item }) => {
@@ -46,10 +46,16 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
             <View>
                 <View>
                     <Text>
-                        {item.bagName}
+                        {item.user_id}
                     </Text>
                     <Text>
-                        {item.bagConsist}
+                        {item.user_email}
+                    </Text>
+                    <Text>
+                        {item.user_password}
+                    </Text>
+                    <Text>
+                        {item.user_name}
                     </Text>
                 </View>
             </View>
@@ -57,4 +63,4 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
     )
 };
 
-export default MedicineList;
+export default UserList;

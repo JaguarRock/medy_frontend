@@ -4,7 +4,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import MedicineScreen from "./AddMedicine/MedicineScreen";
 import LoadingMedicineBag from "./AddMedicine/LoadingMedicineBag";
 import AddNewMedicine from "./AddMedicine/AddNewMedicine";
-
+import AddNewUser from "./AddUser/AddNewUser"
+import UserScreen from "./AddUser/UserScreen"
 const AppStack = createStackNavigator({
     MedicineScreen: {
         screen: MedicineScreen,
@@ -16,6 +17,18 @@ const AppStack = createStackNavigator({
         screen: AddNewMedicine,
         navigationOptions: ({ navigation }) => ({
             title: `Add New Medicine`
+        }),
+    },
+    AddNewUser : {
+        screen : AddNewUser,
+        navigationOptions: ({ navigation }) => ({
+            title: `Add New User`
+        }),
+    },
+    UserScreen : {
+        screen : UserScreen,
+        navigationOptions: ({ navigation }) => ({
+            title: `UserScreen`
         }),
     }
 });

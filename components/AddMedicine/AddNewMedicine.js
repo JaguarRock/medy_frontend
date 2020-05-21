@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView, SafeAreaView, StyleSheet,
-    Text, TextInput, TouchableHighlight, View, AsyncStorage
+    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert
 } from 'react-native';
 
 import { useDispatch } from 'react-redux';
-import { Header } from 'react-navigation-stack';
 import axios from "axios";
 
 import { addMedicineBag, updateMedicineBag } from "../../store/actions/medicineBag";
+import { NavigationEvents } from 'react-navigation';
 
 export default function AddNewMedicine(props) {
     const dispatch = useDispatch();
     const { navigation } = props;
+    let medicineBag = {};
 
-    let medicineBag = navigation.getParam('medicineBag', null);
     // 변수 선언
     const [isSaving, setIsSaving] = useState(false);
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
     const [medicineConsist, setMedicineConsist] = useState(medicineBag ? medicineBag.bagConsist : "");
-
+    
     // Flatlist Data 불러오기
     const onSave = () => {
         let edit = medicineBag !== null;
         let medicineBag_ = {};
-
         if (edit) {
             medicineBag_ = medicineBag;
             medicineBag_['bagName'] = medicineBagname;
             medicineBag_['bagConsist'] = medicineConsist;
-            
+
         } else {
-            let id = 1;
-            medicineBag_ = { "id": id, "bagName": medicineBagname, "bagConsist": medicineConsist };
+            medicineBag_ = { "bagName": medicineBagname, "bagConsist": medicineConsist };
         }
 
         // AsyncStorage.getItem('medicineBags', (err, medicineBags) => {
@@ -54,17 +52,15 @@ export default function AddNewMedicine(props) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.24:5000/medicineBag/add";
+        let url = "http://192.168.0.51:5000/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
-                dispatch(medicineBag ? updateMedicineBag(data) : addMedicineBag(data));
-                navigation.goBack();
+                dispatch(medicineBag_ ? updateMedicineBag(data) : addMedicineBag(data));
+                navigation.replace('MedicineScreen');
             })
-            .catch(error => alert(error.message));
-        
+            .catch(error => alert(error.message))
     };
-
 
     return (
         <KeyboardAvoidingView>
@@ -82,6 +78,7 @@ export default function AddNewMedicine(props) {
                 </View>
                 <View>
                     <View>
+                        
                         <TouchableHighlight onPress={onSave}>
                             <Text>Save</Text>
                         </TouchableHighlight>

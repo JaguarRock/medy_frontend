@@ -22,7 +22,7 @@ export const updateMedicineBag = (medicineBag) => ({
 });
 
 // 약 봉투 삭제
-export const deleteMedicineBag = (id) => ({
+export const deleteMedicineBag = (_id) => ({
     type: DELETE_MEDICINEBAG,
-    data: {id}
+    data: {_id}
 })
