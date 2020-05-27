@@ -3,15 +3,26 @@ import store from "./store/store";
 import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import MainScreen from "./components/MainScreen"
+import SignUp from './components/SignUp/SignUpPage'
+import SignInPage from './components/SignIn/SignInPage'
+import {View, Text} from 'react-native'
+import { render } from 'react-dom';
+import BottomBar from './components/MainScreen'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-export default class App extends Component {
-  render() {
+
+class App extends React.Component{
+  render(){
+    const isSignIn = false;
     return (
       <Provider store={store}>
-        <NavigationContainer>
-          <MainScreen />
+        <NavigationContainer> 
+            {(isSignIn ? <SignUp/> : <SignInPage/>)}
+            {/*<MainScreen/>*/}
         </NavigationContainer>
       </Provider>
     )
   }
 }
+
+export default App

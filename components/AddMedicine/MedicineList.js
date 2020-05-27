@@ -2,8 +2,8 @@ import React, {useRef} from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 
 import { RectButton } from 'react-native-gesture-handler'
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import {Card} from 'react-native-elements'
 function MedicineList ({item, index, navigation, onDelete, onEdit}) {
     const inputEl = useRef(null);
 
@@ -19,41 +19,36 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
                     inputEl.current.close();
                     onEdit(item);
                 }}>
-                    <View>
+                    <Animated.View>
                         <Animated.Text>
                             Edit
                         </Animated.Text>
-                    </View>
+                    </Animated.View>
                 </RectButton>
                 <RectButton onPress={() => {
                     inputEl.current.close();
                     onDelete(item._id)
                 }}>
-                    <View>
+                    <Animated.View>
                         <Animated.Text>
                             Delete
                         </Animated.Text>
-                    </View>
+                    </Animated.View>
                 </RectButton>
             </View>
         );
     };
 
     return (
+        <View>
         <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
             <RightActions progress={progress} dragX={dragX} item={item} />
         )}>
-            <View>
-                <View>
-                    <Text>
-                        {item.bagName}
-                    </Text>
-                    <Text>
-                        {item.bagConsist}
-                    </Text>
-                </View>
+            <View style = {{flex : 1}}>
+                <Card title = {item.bagName}><Text style = {{textAlign : 'center'}}>{item.bagConsist}</Text></Card>
             </View>
         </Swipeable>
+        </View>
     )
 };
 

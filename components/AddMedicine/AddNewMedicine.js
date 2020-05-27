@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView, SafeAreaView, StyleSheet,
-    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert
+    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert, Icon
 } from 'react-native';
-
 import { useDispatch } from 'react-redux';
 import axios from "axios";
-
 import { addMedicineBag, updateMedicineBag } from "../../store/actions/medicineBag";
-import { NavigationEvents } from 'react-navigation';
-
-export default function AddNewMedicine(props) {
+import {Button} from "react-native-elements"
+export default function AddNewMedicine({navigation}) {
     const dispatch = useDispatch();
-    const { navigation } = props;
+    //const { navigation } = props;
     let medicineBag = {};
 
     // 변수 선언
@@ -52,40 +49,47 @@ export default function AddNewMedicine(props) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.51:5000/medicineBag/add";
+        let url = "http://192.168.35.13:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
                 dispatch(medicineBag_ ? updateMedicineBag(data) : addMedicineBag(data));
-                navigation.replace('MedicineScreen');
+                //navigation.replace('MainScreen');
             })
             .catch(error => alert(error.message))
+            navigation.goBack();
     };
 
     return (
         <KeyboardAvoidingView>
             <SafeAreaView>
-                <View>
+                <View style = {styles.container}>
                     <TextInput
                         onChangeText={(text) => setMedicineBagname(text)}
                         placeholder={"약 봉투 이름"}
                         autoFocus={true}
+                        style = {{borderWidth : 1, width : 100, paddingBottom : 2, marginBottom : 3}}
                         value={medicineBagname} />
                     <TextInput
                         onChangeText={(text) => setMedicineConsist(text)}
+                        style = {{borderWidth : 1, width : 100, paddingBottom : 2}}
                         placeholder={"약 구성"}
                         value={medicineConsist} />
                 </View>
                 <View>
-                    <View>
-                        
-                        <TouchableHighlight onPress={onSave}>
-                            <Text>Save</Text>
-                        </TouchableHighlight>
+                    <View style = {{marginLeft : 70}}>
+                        <Button buttonStyle = {{width : 50, height : 30}} title = "저장" onPress={onSave}/>
                     </View>
                 </View>
             </SafeAreaView>
         </KeyboardAvoidingView>
     )
 
+}
+
+const styles = {
+    container : {
+        marginTop : 30,
+        marginLeft : 20
+    }
 }
