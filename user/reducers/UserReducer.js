@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {USERBAG_AVAILABLE, ADD_USERBAG, UPDATE_USERBAG, DELETE_USERBAG} from '../useractions/userBag'
+import {USERBAG_AVAILABLE, ADD_USERBAG, UPDATE_USERBAG, DELETE_USERBAG, SIGNIN_USERBAG} from '../useractions/userBag'
 
 let userdataState = {userBags : []} ;
 
@@ -27,6 +27,15 @@ const userReducer = (state = userdataState, action) => {
         }
 
         case DELETE_USERBAG:{
+            let {_id} = action.data;
+            let clone = JSON.parse(JSON.stringify(state.userBags));
+            const index = clone.findIndex((obj) => obj._id === _id);
+            if (index !== -1) clone.splice(index, 1);
+
+            return {...state, userBags: clone};
+        }
+
+        case SIGNIN_USERBAG:{
             let {_id} = action.data;
             let clone = JSON.parse(JSON.stringify(state.userBags));
             const index = clone.findIndex((obj) => obj._id === _id);

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "HelloWorld",
+    "name": "NewSplash",
     "slug": "medy_front",
     "platforms": [
       "ios",
@@ -12,7 +12,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/NewSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,6 +22,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "android": {
+      "splash": {
+        "dpi": "./assets/NewSplash.png",
+        "resizeMode": "cover"
+      }
+    },
     "ios": {
       "supportsTablet": true
     }

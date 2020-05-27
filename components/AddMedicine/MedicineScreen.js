@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-    FlatList, StyleSheet, SafeAreaView, View, Text,
-    ActivityIndicator, TouchableHighlight, AsyncStorage
-} from 'react-native';
+import { FlatList, SafeAreaView, Text, TouchableHighlight } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
 import MedicineList from "./MedicineList"
-
 import axios from "axios";
 
 export default function MedicineScreen(props) {
@@ -32,7 +27,7 @@ export default function MedicineScreen(props) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.0.51:5000/medicineBag"
+        let url = "http://192.168.35.13:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getMedicineBags(data)))
@@ -68,7 +63,7 @@ export default function MedicineScreen(props) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.0.51:5000/medicineBag/";
+        let url = "http://192.168.35.13:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))

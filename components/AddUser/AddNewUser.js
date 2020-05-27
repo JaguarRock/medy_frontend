@@ -9,16 +9,16 @@ import {addUserBag, updateUserBag} from "../../user/useractions/userBag";
 
 export default function AddNewUser(props) {
     const dispatch = useDispatch();
-    const {navigation} = props;
+    //const {navigation} = props;
 
-    let user = navigation.getParam('userBags', null);
+    //let user = navigation.getParam('userBags', null);
+    console.log(props)
+    let user = {};
     // 변수 선언
     const [isSaving, setIsSaving] = useState(false);
-    const [user_id, setuserID] = useState(user ? user.user_id : "");
     const [user_password, setuserPW] = useState(user ? user.user_password : "");
     const [user_email, setuserEMAIL] = useState(user ? user.user_email : "");
     const [user_name, setuserNAME] = useState(user ? user.user_name : "");
-
     // Flatlist Data 불러오기
     const onSave = () => {
         let edit = user !== null;
@@ -56,7 +56,7 @@ export default function AddNewUser(props) {
         });
         */
        //console.log(navigation.addListener("MedicineScreen"));
-      let url = "http://192.168.0.22:5001/user/add";
+      let url = "http://192.168.35.13:5001/user/add";
        axios.post(url, user_)
            .then(res => res.data)
            .then((data) => {
