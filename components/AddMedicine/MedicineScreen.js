@@ -33,6 +33,10 @@ export default function MedicineScreen(props) {
             .then((data) => dispatch(getMedicineBags(data)))
             .catch(error => alert(error.message))
             .finally(() => setIsFetching(false));
+<<<<<<< HEAD
+            
+=======
+>>>>>>> 805b23f074c4639bbc48cf381a89064df1b09393
     };
 
 
