@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {
-    FlatList, SafeAreaView, ScrollView, Text, 
+    FlatList, SafeAreaView, ScrollView, Text,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
 import MedicineList from "./MedicineList";
 import axios from "axios";
-import {ListItem} from 'react-native-elements'
+import { ListItem } from 'react-native-elements'
 export default function HistoryList(props) {
     const dispatch = useDispatch();
     const { navigation } = props;
@@ -30,7 +30,7 @@ export default function HistoryList(props) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.0.8:5001/medicineBag"
+        let url = "http://192.168.0.16:5000/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getMedicineBags(data)))
@@ -62,7 +62,7 @@ export default function HistoryList(props) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.0.8:5001/medicineBag/";
+        let url = "http://192.168.0.16:5000/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))
@@ -72,14 +72,14 @@ export default function HistoryList(props) {
     return (
         <SafeAreaView>
             <ScrollView >
-            <FlatList
-                data={medicineBags}
-                renderItem={renderItem}
-                keyExtractor={(item, index) => `medicineBags_${index}`} />
-            {/*<TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
+                <FlatList
+                    data={medicineBags}
+                    renderItem={renderItem}
+                    keyExtractor={(item, index) => `medicineBags_${index}`} />
+                {/*<TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
                 <Text>+</Text>
                </TouchableHighlight>*/}
-               </ScrollView>
+            </ScrollView>
         </SafeAreaView>
     )
 

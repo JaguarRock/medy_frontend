@@ -9,6 +9,7 @@ import {View, Text} from 'react-native'
 import { render } from 'react-dom';
 import BottomBar from './components/MainScreen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import Navigator from './components/Navigator';
 
 
 class App extends React.Component{
@@ -18,7 +19,7 @@ class App extends React.Component{
       <Provider store={store}>
         <NavigationContainer> 
             {/*{(isSignIn ? <SignUp/> : <SignInPage/>)}*/}
-            <MainScreen/>
+            <Navigator/>
         </NavigationContainer>
       </Provider>
     )

@@ -6,15 +6,17 @@ import {
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 import { addMedicineBag, updateMedicineBag } from "../../store/actions/medicineBag";
-import {Button} from "react-native-elements"
-export default function AddNewMedicine({navigation}) {
-    const dispatch = useDispatch();console.log(navigation)
+import { Button } from "react-native-elements";
+
+export default function AddNewMedicine({ navigation }) {
+    const dispatch = useDispatch();
     let medicineBag = {};
     // 변수 선언
+    console.log(navigation);
     const [isSaving, setIsSaving] = useState(false);
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
     const [medicineConsist, setMedicineConsist] = useState(medicineBag ? medicineBag.bagConsist : "");
-    
+
     // Flatlist Data 불러오기
     const onSave = () => {
         let edit = medicineBag !== null;
@@ -47,37 +49,41 @@ export default function AddNewMedicine({navigation}) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.8:5001/medicineBag/add";
+        let url = "http://192.168.0.16:5000/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
                 dispatch(medicineBag_ ? updateMedicineBag(data) : addMedicineBag(data));
                 //navigation.replace('MainScreen');
+                navigation.reset({
+                    index: 1,
+                    routes: [{ name: 'History' }]
+                });
             })
             .catch(error => alert(error.message))
-            navigation.replace('Add');
-            alert("약 추가 완료")
+            //이게 원래 너 코드
+        alert("약 추가 완료")
     };
 
     return (
         <KeyboardAvoidingView>
             <SafeAreaView>
-                <View style = {styles.container}>
+                <View style={styles.container}>
                     <TextInput
                         onChangeText={(text) => setMedicineBagname(text)}
                         placeholder={"약 봉투 이름"}
                         autoFocus={true}
-                        style = {{borderWidth : 1, width : 100, paddingBottom : 2, marginBottom : 3}}
+                        style={{ borderWidth: 1, width: 100, paddingBottom: 2, marginBottom: 3 }}
                         value={medicineBagname} />
                     <TextInput
                         onChangeText={(text) => setMedicineConsist(text)}
-                        style = {{borderWidth : 1, width : 100, paddingBottom : 2}}
+                        style={{ borderWidth: 1, width: 100, paddingBottom: 2 }}
                         placeholder={"약 구성"}
                         value={medicineConsist} />
                 </View>
                 <View>
-                    <View style = {{marginLeft : 70}}>
-                        <Button buttonStyle = {{width : 50, height : 30}} title = "저장" onPress = {onSave}/>
+                    <View style={{ marginLeft: 70 }}>
+                        <Button buttonStyle={{ width: 50, height: 30 }} title="저장" onPress={onSave} />
                     </View>
                 </View>
             </SafeAreaView>
@@ -87,8 +93,8 @@ export default function AddNewMedicine({navigation}) {
 }
 
 const styles = {
-    container : {
-        marginTop : 30,
-        marginLeft : 20
+    container: {
+        marginTop: 30,
+        marginLeft: 20
     }
 }
