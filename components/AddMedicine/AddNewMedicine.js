@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView, SafeAreaView, StyleSheet,
-    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert, Icon
+    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert, Icon,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 import { addMedicineBag, updateMedicineBag } from "../../store/actions/medicineBag";
 import {Button} from "react-native-elements"
 export default function AddNewMedicine({navigation}) {
-    const dispatch = useDispatch();
-    //const { navigation } = props;
+    const dispatch = useDispatch();console.log(navigation)
     let medicineBag = {};
-
     // 변수 선언
     const [isSaving, setIsSaving] = useState(false);
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
@@ -49,7 +47,7 @@ export default function AddNewMedicine({navigation}) {
         //         });
         //     }
         // });
-        let url = "http://192.168.35.13:5001/medicineBag/add";
+        let url = "http://192.168.0.8:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
@@ -57,7 +55,7 @@ export default function AddNewMedicine({navigation}) {
                 //navigation.replace('MainScreen');
             })
             .catch(error => alert(error.message))
-            navigation.goBack();
+            navigation.replace('Add');
     };
 
     return (
@@ -78,7 +76,7 @@ export default function AddNewMedicine({navigation}) {
                 </View>
                 <View>
                     <View style = {{marginLeft : 70}}>
-                        <Button buttonStyle = {{width : 50, height : 30}} title = "저장" onPress={onSave}/>
+                        <Button buttonStyle = {{width : 50, height : 30}} title = "저장" onPress = {onSave}/>
                     </View>
                 </View>
             </SafeAreaView>

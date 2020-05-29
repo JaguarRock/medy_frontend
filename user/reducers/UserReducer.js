@@ -36,13 +36,15 @@ const userReducer = (state = userdataState, action) => {
         }
 
         case SIGNIN_USERBAG:{
-            let {_id} = action.data;
+            let {userBag} = action.data;
             let clone = JSON.parse(JSON.stringify(state.userBags));
             const index = clone.findIndex((obj) => obj._id === _id);
-            if (index !== -1) clone.splice(index, 1);
+            if (index !== -1 && clone[index] === userBag){
+                
+            } 
 
             return {...state, userBags: clone};
-        }
+        } 
         default : 
             return state;
     }
