@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableHighlight } from 'react-native';
+import {
+    FlatList, SafeAreaView, ScrollView, Text, 
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
-import MedicineList from "../History/MedicineList"
-import axios from "axios";
 
-export default function MedicineScreen(props) {
+import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
+import MedicineList from "./MedicineList";
+import axios from "axios";
+import {ListItem} from 'react-native-elements'
+export default function HistoryList(props) {
     const dispatch = useDispatch();
     const { navigation } = props;
     // 변수 선언
@@ -33,7 +36,6 @@ export default function MedicineScreen(props) {
             .then((data) => dispatch(getMedicineBags(data)))
             .catch(error => alert(error.message))
             .finally(() => setIsFetching(false));
-            
     };
 
 
@@ -69,13 +71,15 @@ export default function MedicineScreen(props) {
 
     return (
         <SafeAreaView>
+            <ScrollView >
             <FlatList
                 data={medicineBags}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => `medicineBags_${index}`} />
-            <TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
+            {/*<TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
                 <Text>+</Text>
-            </TouchableHighlight>
+               </TouchableHighlight>*/}
+               </ScrollView>
         </SafeAreaView>
     )
 

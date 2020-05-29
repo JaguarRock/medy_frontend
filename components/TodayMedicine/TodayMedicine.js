@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableHighlight } from 'react-native';
+import { FlatList, SafeAreaView, Text, TouchableHighlight,Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
-import MedicineList from "../History/MedicineList"
+import TodayMedicineList from "./TodayMedicineList"
 import axios from "axios";
 
-export default function MedicineScreen(props) {
+export default function TodayMedicine({navigation}) {
     const dispatch = useDispatch();
-    const { navigation } = props;
     // 변수 선언
-
     const [isFetching, setIsFetching] = useState(false);
-
     // Redux Store State 접근
     const dataReducer = useSelector((state) => state.dataReducer);
     const { medicineBags } = dataReducer;
@@ -33,13 +30,12 @@ export default function MedicineScreen(props) {
             .then((data) => dispatch(getMedicineBags(data)))
             .catch(error => alert(error.message))
             .finally(() => setIsFetching(false));
-            
     };
 
 
     const renderItem = ({ item, index }) => {
         return (
-            <MedicineList item={item} index={index} navigation={navigation} onDelete={onDelete} onEdit={onEdit} />
+            <TodayMedicineList item={item} index={index} navigation={navigation} onDelete={onDelete} onEdit={onEdit} />
         )
     };
 
@@ -60,7 +56,7 @@ export default function MedicineScreen(props) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.0.8:5001/medicineBag/";
+        let url = "http://192.168.35.13:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))
@@ -72,10 +68,8 @@ export default function MedicineScreen(props) {
             <FlatList
                 data={medicineBags}
                 renderItem={renderItem}
+                horizontal = {true}
                 keyExtractor={(item, index) => `medicineBags_${index}`} />
-            <TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
-                <Text>+</Text>
-            </TouchableHighlight>
         </SafeAreaView>
     )
 

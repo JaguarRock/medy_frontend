@@ -56,6 +56,7 @@ export default function AddNewMedicine({navigation}) {
             })
             .catch(error => alert(error.message))
             navigation.replace('Add');
+            alert("약 추가 완료")
     };
 
     return (
