@@ -17,8 +17,8 @@ class App extends React.Component{
     return (
       <Provider store={store}>
         <NavigationContainer> 
-            {(isSignIn ? <SignUp/> : <SignInPage/>)}
-            {/*<MainScreen/>*/}
+            {/*{(isSignIn ? <SignUp/> : <SignInPage/>)}*/}
+            <MainScreen/>
         </NavigationContainer>
       </Provider>
     )

@@ -7,6 +7,7 @@ import Add from "../components/AddMedicine/Add";
 import Store from "../components/Store/Store";
 import MyPage from "../components/MyPage/MyPage";
 import History from "../components/History/History";
+import AddNavigator from '../components/AddMedicine/AddNavigator'
 import {Feather} from 'react-native-vector-icons'
 import {FontAwesome5} from 'react-native-vector-icons'
 import {MaterialIcons} from 'react-native-vector-icons'
@@ -44,7 +45,7 @@ export default function MyTabs() {
                 />
             <Tab.Screen 
                 name="Add Medicine"
-                component={Add}
+                component={AddNavigator}
                 options = {{
                     tabBarIcon :({color, size}) => (
                         <MaterialIcons name = "add" color = {color} size = {size}/>
