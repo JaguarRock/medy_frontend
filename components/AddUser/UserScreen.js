@@ -25,7 +25,7 @@ export default function UserScreen(props){
             else if (userBags !== null) dispatch(getUserBags(JSON.parse(userBags)));
             setIsFetching(false);
         })*/
-        let url = "http://192.168.35.13:5001/user"
+        let url = "http://192.168.0.16:5000/user"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getUserBags(data)))

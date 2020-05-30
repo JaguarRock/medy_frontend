@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, SafeAreaView, Text, TouchableHighlight,Button } from 'react-native';
+import { FlatList, SafeAreaView, Text, TouchableHighlight, Button } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
 import TodayMedicineList from "./TodayMedicineList"
 import axios from "axios";
 
-export default function TodayMedicine({navigation}) {
+export default function TodayMedicine({ navigation }) {
     const dispatch = useDispatch();
     // 변수 선언
     const [isFetching, setIsFetching] = useState(false);
@@ -24,7 +24,7 @@ export default function TodayMedicine({navigation}) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.35.13:5001/medicineBag"
+        let url = "http://192.168.43.194:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getMedicineBags(data)))
@@ -56,7 +56,7 @@ export default function TodayMedicine({navigation}) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.35.13:5001/medicineBag/";
+        let url = "http://192.168.43.194:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))
@@ -68,7 +68,7 @@ export default function TodayMedicine({navigation}) {
             <FlatList
                 data={medicineBags}
                 renderItem={renderItem}
-                horizontal = {true}
+                horizontal={true}
                 keyExtractor={(item, index) => `medicineBags_${index}`} />
         </SafeAreaView>
     )

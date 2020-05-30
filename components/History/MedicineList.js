@@ -1,12 +1,11 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 
 import { RectButton } from 'react-native-gesture-handler'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import {Card} from 'react-native-elements'
-function MedicineList ({item, index, navigation, onDelete, onEdit}) {
+import { Card } from 'react-native-elements'
+function MedicineList({ item, index, navigation, onDelete, onEdit }) {
     const inputEl = useRef(null);
-
     const RightActions = ({ progress, dragX, onPress, item }) => {
         const scale = dragX.interpolate({
             inputRange: [-100, 0],
@@ -41,13 +40,13 @@ function MedicineList ({item, index, navigation, onDelete, onEdit}) {
 
     return (
         <View>
-        <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
-            <RightActions progress={progress} dragX={dragX} item={item} />
-        )}>
-            <View style = {{flex : 1}}>
-                <Card title = {item.bagName}><Text style = {{textAlign : 'center'}}>{item.bagConsist}</Text></Card>
-            </View>
-        </Swipeable>
+            <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
+                <RightActions progress={progress} dragX={dragX} item={item} />
+            )}>
+                <View style={{ flex: 1 }}>
+                    <Card title={item.bagName}><Text style={{ textAlign: 'center' }}>{item.bagConsist}</Text></Card>
+                </View>
+            </Swipeable>
         </View>
     )
 };

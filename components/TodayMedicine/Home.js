@@ -1,43 +1,42 @@
 import React from 'react'
-import {StyleSheet, View, Text, Button , ScrollView} from 'react-native'
-import {Divider, Card} from 'react-native-elements'
+import { StyleSheet, View, Text,Button, ScrollView } from 'react-native'
+import { Divider, Card } from 'react-native-elements'
 import TodayMedicine from './TodayMedicine'
-export default function Home({navigation}) {
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from '@material-ui/core/TextField'
+export default function Home({ navigation }) {
     return (
-        <View style ={styles.container}>
-            <Text style = {styles.title}>H O M E</Text>
-            {/*<Button title = "로그인화면으로" onPress = {navigation.navigate('SignIn')}/> */}
-            {/*버튼 누르지도 않았는데 지맘대로 작동함 */}
-            {/*<View style = {styles.search}><Search/></View>*/}
-            <Text style = {styles.subtitle}>오늘의 약봉투</Text>
-            <Divider style = {{backgroundColor : '#FF5A5F', width : '70%', marginLeft : 20, borderWidth :1, borderColor : '#FF5A5F'}}/>
-            <TodayMedicine/>
+        <View style={styles.container}>
+            <Text style={styles.title}>H O M E</Text>
+            <Text style={styles.subtitle}>오늘의 약봉투</Text>
+            <Divider style={{ backgroundColor: '#FF5A5F', width: '70%', marginLeft: 20, borderWidth: 1, borderColor: '#FF5A5F' }} />
+            <TodayMedicine navigation = {navigation} />
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor : '#FAFAFA'
+        flex: 1,
+        backgroundColor: '#FAFAFA'
     },
-    title :{
-      color : 'black',
-      fontSize : 30,
-      marginTop : 70,
-      marginLeft : 20,
-      marginRight : 200,
-      paddingBottom : 20,
-      backgroundColor : '#FF5A5F',
-      
+    title: {
+        color: 'black',
+        fontSize: 30,
+        marginTop: 70,
+        marginLeft: 20,
+        marginRight: 200,
+        paddingBottom: 20,
+        backgroundColor: '#FF5A5F',
+
     },
-    subtitle : {
-        fontSize : 20,
-        paddingTop : 25,
-        marginLeft : 20,
-        paddingBottom : 3
+    subtitle: {
+        fontSize: 20,
+        paddingTop: 25,
+        marginLeft: 20,
+        paddingBottom: 3
     },
-    search : {
-        justifyContent : 'center',
-        alignItems : 'center'
+    search: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
-  });
+});
