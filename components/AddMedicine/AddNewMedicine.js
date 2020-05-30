@@ -47,15 +47,17 @@ export default function AddNewMedicine({navigation}) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.8:5001/medicineBag/add";
+        let url = "http://192.168.43.194:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
                 dispatch(medicineBag_ ? updateMedicineBag(data) : addMedicineBag(data));
                 //navigation.replace('MainScreen');
+            
             })
             .catch(error => alert(error.message))
-            navigation.replace('Add');
+            
+            navigation.navigate('History');
             alert("약 추가 완료")
     };
 

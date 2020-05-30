@@ -2,11 +2,11 @@ import React from 'react'
 import {StyleSheet, View, Text, Button, ScrollView} from 'react-native'
 import HistoryPage from './HistoryPage'
 
-const History = () => {
+const History = ({navigation}) => {
     return(
         <View style = {styles.container}>
             <Text style = {styles.title}>H I S T O R Y</Text>
-            <HistoryPage/>
+            <HistoryPage navigation = {navigation}/>
         </View>
     )
 }

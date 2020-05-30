@@ -24,7 +24,7 @@ export default function TodayMedicine({navigation}) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.0.8:5001/medicineBag"
+        let url = "http://192.168.35.13:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getMedicineBags(data)))

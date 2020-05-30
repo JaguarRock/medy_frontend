@@ -5,9 +5,9 @@ import HistoryCalender from './HistoryCalender'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import TabBar from "react-native-underline-tabbar"
 
-const Page = () => (
+const Page = ({navigation}) => (
     <View style={styles.container}>
-      <HistoryList/>
+      <HistoryList navigation = {navigation}/>
     </View>
 );
 
@@ -17,19 +17,18 @@ const Page2 = ({label}) => (
     </View>
 )
 
-class HistoryPage extends Component {
-  render() {
+const HistoryPage = ({navigation}) => {
     return (
         <View style={[styles.container, {paddingTop: 20}, {flex:1}]}>
           <ScrollableTabView
               tabBarActiveTextColor="#FF5A5F"
               renderTabBar={() => <TabBar underlineColor="#FF5A5F" />}>
-            <Page tabLabel={{label: "리스트"}} label = "리스트"/>
+            <Page navigation = {navigation} tabLabel={{label: "리스트"}} label = "리스트"/>
             <Page2 tabLabel={{label: "캘린더"}} label = "캘린더"/>
           </ScrollableTabView>
         </View>
     );
-  }
+  
 }
 
 const styles = StyleSheet.create({
