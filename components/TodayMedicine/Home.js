@@ -1,17 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text, Button, ScrollView } from 'react-native'
+import { StyleSheet, View, Text,Button, ScrollView } from 'react-native'
 import { Divider, Card } from 'react-native-elements'
 import TodayMedicine from './TodayMedicine'
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from '@material-ui/core/TextField'
 export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>H O M E</Text>
-            {/*<Button title = "로그인화면으로" onPress = {navigation.navigate('SignIn')}/> */}
-            {/*버튼 누르지도 않았는데 지맘대로 작동함 */}
-            {/*<View style = {styles.search}><Search/></View>*/}
             <Text style={styles.subtitle}>오늘의 약봉투</Text>
             <Divider style={{ backgroundColor: '#FF5A5F', width: '70%', marginLeft: 20, borderWidth: 1, borderColor: '#FF5A5F' }} />
-            <TodayMedicine />
+            <TodayMedicine navigation = {navigation} />
         </View>
     )
 }

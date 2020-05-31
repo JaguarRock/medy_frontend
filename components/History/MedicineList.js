@@ -20,7 +20,7 @@ function MedicineList({ item, index, navigation, onDelete, onEdit }) {
                 }}>
                     <Animated.View>
                         <Animated.Text>
-                            Edit
+                            더보기
                         </Animated.Text>
                     </Animated.View>
                 </RectButton>

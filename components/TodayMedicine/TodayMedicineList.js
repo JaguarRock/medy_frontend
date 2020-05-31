@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card, Avatar, Button } from 'react-native-elements'
 
-function TodayMedicine({ item }) {
+function TodayMedicine({ item, navigation }) {
     return (
         <ScrollView horizontal={true} style={{ scaleX: 1, paddingBottom: 20 }} showsHorizontalScrollIndicator={false}>
             <Card containerStyle={styles.cardstyle}>
@@ -10,7 +10,8 @@ function TodayMedicine({ item }) {
                     <Text style={{ color: 'black', fontSize: 35 }}>{item.bagName}</Text>
                 </TouchableOpacity>
                 <Text style={styles.time}>{item.bagConsist} </Text>
-                <Text style={{ paddingTop: 10, fontSize: 30 }}>01 : 18 : 39 </Text>
+            <Button title = "더보기" onPress = {() => {navigation.navigate('HistoryItem', {bagName : item.bagName, bagConsist : item.bagConsist})}}/>
+               
             </Card>
         </ScrollView>
     )

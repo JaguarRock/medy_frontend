@@ -12,7 +12,6 @@ export default function AddNewMedicine({ navigation }) {
     const dispatch = useDispatch();
     let medicineBag = {};
     // 변수 선언
-    console.log(navigation);
     const [isSaving, setIsSaving] = useState(false);
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
     const [medicineConsist, setMedicineConsist] = useState(medicineBag ? medicineBag.bagConsist : "");
@@ -49,7 +48,7 @@ export default function AddNewMedicine({ navigation }) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.16:5000/medicineBag/add";
+        let url = "http://192.168.43.194:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {

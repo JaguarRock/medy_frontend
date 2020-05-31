@@ -3,18 +3,15 @@ import {
     FlatList, SafeAreaView, ScrollView, Text,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-
+import HistoryItem from './HistoryItem'
 import { deleteMedicineBag, getMedicineBags } from "../../store/actions/medicineBag";
 import MedicineList from "./MedicineList";
 import axios from "axios";
 import { ListItem } from 'react-native-elements'
-export default function HistoryList(props) {
+export default function HistoryList({navigation}) {
     const dispatch = useDispatch();
-    const { navigation } = props;
     // 변수 선언
-
     const [isFetching, setIsFetching] = useState(false);
-
     // Redux Store State 접근
     const dataReducer = useSelector((state) => state.dataReducer);
     const { medicineBags } = dataReducer;
@@ -30,7 +27,7 @@ export default function HistoryList(props) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.0.16:5000/medicineBag"
+        let url = "http://192.168.43.194:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => dispatch(getMedicineBags(data)))
@@ -41,13 +38,13 @@ export default function HistoryList(props) {
 
     const renderItem = ({ item, index }) => {
         return (
-            <MedicineList item={item} index={index} navigation={navigation} onDelete={onDelete} onEdit={onEdit} />
+            <MedicineList item={item} index={index} navigation={navigation} onDelete={onDelete} onEdit={onEdit}/>
         )
     };
 
     // 약 봉투 수정
     const onEdit = (item) => {
-        navigation.navigate('AddNewMedicine', { medicineBag: item, title: "Edit MedicineBag" })
+            navigation.navigate('HistoryItem', {bagName : item.bagName, bagConsist : item.bagConsist})
     };
 
     // 약 봉투 삭제
@@ -62,7 +59,7 @@ export default function HistoryList(props) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.0.16:5000/medicineBag/";
+        let url = "http://192.168.43.194:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))
@@ -71,7 +68,6 @@ export default function HistoryList(props) {
 
     return (
         <SafeAreaView>
-            <ScrollView >
                 <FlatList
                     data={medicineBags}
                     renderItem={renderItem}
@@ -79,7 +75,6 @@ export default function HistoryList(props) {
                 {/*<TouchableHighlight onPress={() => navigation.navigate('AddNewMedicine', { title: "Add New Medicine" })}>
                 <Text>+</Text>
                </TouchableHighlight>*/}
-            </ScrollView>
         </SafeAreaView>
     )
 

@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack'
 import Home from "../components/TodayMedicine/Home";
 //import History from "../components/History/History";
 import Add from "../components/AddMedicine/Add";
 import Store from "../components/Store/Store";
 import MyPage from "../components/MyPage/MyPage";
 import History from "../components/History/History";
-import AddNavigator from '../components/AddMedicine/AddNavigator'
+//import AddNavigator from '../components/AddMedicine/AddNavigator'
 import { Feather } from 'react-native-vector-icons'
 import { FontAwesome5 } from 'react-native-vector-icons'
 import { MaterialIcons } from 'react-native-vector-icons'
 
 const Tab = createBottomTabNavigator();
-
 
 export default function MyTabs() {
     return (
@@ -44,7 +44,7 @@ export default function MyTabs() {
             />
             <Tab.Screen
                 name="Add Medicine"
-                component={AddNavigator}
+                component={Add}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcons name="add" color={color} size={size} />

@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import AddNewMedicine from './AddNewMedicine'
-import AddNavigator from './AddNavigator'
 const Add = ({ navigation }) => {
   return (
     <View style={styles.container}>
