@@ -9,7 +9,6 @@ import HistoryList from '../components/History/HistoryList'
 import HistoryItem from '../components/History/HistoryItem'
 import MedicineList from './History/MedicineList';
 import TodayMedicine from './TodayMedicine/TodayMedicine'
-
 const Stack = createStackNavigator();
 
 function Navigator() {
@@ -23,7 +22,7 @@ function Navigator() {
             <Stack.Screen name="History List" component={HistoryList}/>
             <Stack.Screen name="Medicine List" component={MedicineList}/>
             <Stack.Screen name="HistoryItem" component={HistoryItem}/>
-            <Stack.Screen name="TodayMedicine" component={TodayMedicine}/>
+            <Stack.Screen name="TodayMedicine" component={TodayMedicine}/>            
         </Stack.Navigator> 
     )
 }

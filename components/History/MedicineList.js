@@ -1,10 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
-
+import { SearchBar } from 'react-native-elements'
 import { RectButton } from 'react-native-gesture-handler'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Card } from 'react-native-elements'
-function MedicineList({ item, index, navigation, onDelete, onEdit }) {
+
+function MedicineList({ search, item, route, onDelete, onEdit }) {
+
+    {/*useEffect(()=>{
+        return(
+            searchitem = ''
+        )
+    },[])
+const searchitem = route.params.searchitem*/}
+    const [searchhistory, setSearchHistory] = useState('');
     const inputEl = useRef(null);
     const RightActions = ({ progress, dragX, onPress, item }) => {
         const scale = dragX.interpolate({
@@ -14,26 +23,28 @@ function MedicineList({ item, index, navigation, onDelete, onEdit }) {
         });
         return (
             <View>
-                <RectButton onPress={() => {
-                    inputEl.current.close();
-                    onEdit(item);
-                }}>
-                    <Animated.View>
-                        <Animated.Text>
-                            더보기
+                <View>
+                    <RectButton onPress={() => {
+                        inputEl.current.close();
+                        onEdit(item);
+                    }}>
+                        <Animated.View>
+                            <Animated.Text>
+                                더보기
                         </Animated.Text>
-                    </Animated.View>
-                </RectButton>
-                <RectButton onPress={() => {
-                    inputEl.current.close();
-                    onDelete(item._id)
-                }}>
-                    <Animated.View>
-                        <Animated.Text>
-                            Delete
+                        </Animated.View>
+                    </RectButton>
+                    <RectButton onPress={() => {
+                        inputEl.current.close();
+                        onDelete(item._id)
+                    }}>
+                        <Animated.View>
+                            <Animated.Text>
+                                Delete
                         </Animated.Text>
-                    </Animated.View>
-                </RectButton>
+                        </Animated.View>
+                    </RectButton>
+                </View>
             </View>
         );
     };
@@ -48,6 +59,7 @@ function MedicineList({ item, index, navigation, onDelete, onEdit }) {
                 </View>
             </Swipeable>
         </View>
+
     )
 };
 
