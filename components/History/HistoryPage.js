@@ -5,7 +5,7 @@ import HistoryCalender from './HistoryCalender'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 import TabBar from "react-native-underline-tabbar"
 
-const Page = ({ navigation }) => (
+const Page = ({ navigation}) => (
   <View style={styles.container}>
     <HistoryList navigation={navigation} />
   </View>
@@ -17,7 +17,7 @@ const Page2 = ({ label }) => (
   </View>
 )
 
-const HistoryPage = ({ navigation }) => {
+const HistoryPage = ({ navigation}) => {
   return (
     <View style={[styles.container, { paddingTop: 20 }, { flex: 1 }]}>
       <ScrollableTabView
