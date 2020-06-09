@@ -29,9 +29,9 @@ const searchitem = route.params.searchitem*/}
                         onEdit(item);
                     }}>
                         <Animated.View>
-                            <Animated.Text>
+                            <Text style = {{marginTop : 35}}>
                                 더보기
-                        </Animated.Text>
+                        </Text>
                         </Animated.View>
                     </RectButton>
                     <RectButton onPress={() => {
@@ -39,27 +39,38 @@ const searchitem = route.params.searchitem*/}
                         onDelete(item._id)
                     }}>
                         <Animated.View>
-                            <Animated.Text>
-                                Delete
-                        </Animated.Text>
+                            <Text style = {{color : 'red'}}>
+                                삭제
+                        </Text>
                         </Animated.View>
                     </RectButton>
                 </View>
             </View>
         );
     };
-
     return (
         <View>
+            
             <Swipeable ref={inputEl} renderRightActions={(progress, dragX) => (
                 <RightActions progress={progress} dragX={dragX} item={item} />
             )}>
+                
                 <View style={{ flex: 1 }}>
-                    <Card title={item.bagName}><Text style={{ textAlign: 'center' }}>{item.bagConsist}</Text></Card>
+                    <Card containerStyle={{
+                        borderRadius: 7, shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                        },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 3.84,
+
+                        elevation: 3.2, marginBottom: 7, marginTop: 3
+                    }}titleStyle = {{fontSize : 22}} title={item.bagName}><View flexDirection = 'row'><Text style={{  marginLeft : 155, fontSize : 17 }}>{item.bagConsist}</Text></View></Card>
                 </View>
             </Swipeable>
         </View>
-
+ 
     )
 };
 

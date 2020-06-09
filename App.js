@@ -10,7 +10,7 @@ import { render } from 'react-dom';
 import BottomBar from './components/MainScreen'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Navigator from './components/Navigator';
-
+import AppContainer from './PushAlarm/AppContainer'
 
 class App extends React.Component{
   render(){
@@ -20,6 +20,7 @@ class App extends React.Component{
         <NavigationContainer> 
             {/*{(isSignIn ? <SignUp/> : <SignInPage/>)}*/}
             <Navigator/>
+            {/*<AppContainer/>*/}
         </NavigationContainer>
       </Provider>
     )
