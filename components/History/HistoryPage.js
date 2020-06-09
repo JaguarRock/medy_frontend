@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#F2F2F2',
   },
   welcome: {
     fontSize: 20,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#FCFCFC',
     marginBottom: 5,
     fontSize: 28,
   },

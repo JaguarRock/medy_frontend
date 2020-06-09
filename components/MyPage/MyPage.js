@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Feather } from 'react-native-vector-icons'
 
 const userinfo = {
-  name: '민효린',
+  name: '나이팅게일',
   age: '34',
   sex: '여',
   sick: 'Yes',
@@ -27,11 +27,11 @@ function Sick({ navigation }) {
 function MyPaper({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MyPage</Text>
+      <Text style={styles.title}>M Y P A G E</Text>
       <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
         <Avatar
           rounded
-          source={{ uri: 'http://img.asiatoday.co.kr/file/2017y/04m/26d/2017042601002345800168511.jpg' }}
+          source={{ uri: 'https://t1.daumcdn.net/cfile/blog/24746244518A4CCB0D' }}
           size='xlarge'
         >
         </Avatar>
@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'black',
-    fontSize: 30,
-    marginTop: 70,
-    marginLeft: 20,
-    marginRight: 200,
-    paddingBottom: 20,
-    backgroundColor: '#FF5A5F'
+        fontSize: 45,
+        marginTop: 70,
+        marginLeft: 20,
+        marginRight: 100,
+        paddingBottom: 7,
+        fontWeight : 'bold'
   },
   subtitle: {
     fontSize: 20,

@@ -27,7 +27,6 @@ export default function HistoryList({ navigation }) {
     // Redux Store State 접근
     const dataReducer = useSelector((state) => state.dataReducer);
     const { medicineBags } = dataReducer;
-    
     const filteredData = medicineBags.filter(function (item) {
         return item.bagName === searchhistory
     }).map(function ({ __v, _id, bagName, bagConsist, bagStartDate, bagEndDate }) {
@@ -47,7 +46,7 @@ export default function HistoryList({ navigation }) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.35.13:5001/medicineBag"
+        let url = "http://192.168.0.12:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => { dispatch(getMedicineBags(data)) })
@@ -64,7 +63,7 @@ export default function HistoryList({ navigation }) {
 
     // 약 봉투 수정
     const onEdit = (item) => {
-        navigation.navigate('HistoryItem', { bagName: item.bagName, bagConsist: item.bagConsist, bagStartDate: item.bagStartDate, bagEndDate: item.bagEndDate })
+        navigation.navigate('HistoryItem', { bagName: item.bagName, bagConsist: item.bagConsist,bagTime : item.bagTime, bagConsistTwo: item.bagConsistTwo,bagConsistThree: item.bagConsistThree, bagStartDate: item.bagStartDate, bagEndDate: item.bagEndDate })
     };
 
     // 약 봉투 삭제
@@ -79,7 +78,7 @@ export default function HistoryList({ navigation }) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.35.13:5001/medicineBag/";
+        let url = "http://192.168.0.12:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))
@@ -89,7 +88,7 @@ export default function HistoryList({ navigation }) {
     return (
         <SafeAreaView>
             <View>
-                <SearchBar round containerStyle={{ backgroundColor: 'none', width: '95%', borderWidth: 0, borderTopWidth: 0, borderBottomWidth: 0 }}
+                <SearchBar round containerStyle={{ backgroundColor: '#F2F2F2',width: '95%', borderWidth: 0, borderTopWidth: 0, borderBottomWidth: 0 }}
                     inputContainerStyle={{ backgroundColor: 'white', borderColor: 'black', borderWidth: 1, borderBottomWidth: 1 }}
                     value={searchhistory}
                     onChangeText={onChangeSearch}

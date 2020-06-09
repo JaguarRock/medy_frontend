@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     KeyboardAvoidingView, SafeAreaView, StyleSheet,
-    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert, Icon,
+    Text, TextInput, TouchableHighlight, View, AsyncStorage, Alert, Icon, Platform
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import axios from "axios";
@@ -9,6 +9,8 @@ import { addMedicineBag, updateMedicineBag } from "../../store/actions/medicineB
 import { Button, Card } from "react-native-elements";
 //import DateInput from './DateInput';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function AddNewMedicine({ navigation }) {
     const [medicineStartDate, setMedicineStartDate] = useState(new Date(1598051730000));
@@ -52,7 +54,6 @@ export default function AddNewMedicine({ navigation }) {
         showEndMode('date');
     };
 
-
     const showEndTimepicker = () => {
         showEndMode('time');
     };
@@ -63,24 +64,49 @@ export default function AddNewMedicine({ navigation }) {
     const [isSaving, setIsSaving] = useState(false);
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
     const [medicineConsist, setMedicineConsist] = useState(medicineBag ? medicineBag.bagConsist : "");
-    const [consist, setConsist] = useState('');
-    const [nextId, setNextId] = useState(0);
+    const [medicineTime, setMedicineTime] = useState(medicineBag ? medicineBag.bagTime : "");
+    
+    const [input, setInput] = useState({
+        textInput : [''],
+        inputConsist : ['']
+    })
 
-    {/*const InputList = medicineConsist.map(mconsist=><View><TextInput
-    onChangeText={(text) => setMedicineConsist(text)}
-    placeholder={"약 봉투 이름"}
-    autoFocus={true}
-    style={{ borderWidth: 1, width: 100, paddingBottom: 2, marginBottom: 3 }}
-    value={consist} /> <Button onPress = {addInput}/></View>)
-    const addInput = ({consist}) => {
-        const nextInput = medicineConsist.concat({
-            id:nextId,
-            consist : consist
-        })
-        setConsist(consist)
-        setNextId(nextId)
-        setMedicineConsist(nextInput)
-    }*/}
+
+    const addInputText = (index) => {
+        let textInput = input.textInput
+        textArray.push(<TextInput onChange={(text) => addValues(text, index)} />)
+        setInput(textInput);
+    }
+    
+    const removeTextInput = () => {
+        let textInput = this.state.textInput;
+        let inputData = this.state.inputData;
+        textInput.pop();
+        inputData.pop();
+        this.setState({ textInput,inputData });
+      }
+    
+
+    const addValues = (text, index) => {
+        let consistArray = inputConsist
+        let checkBool = false;
+        if (consistArray.legth !== 0) {
+            consistArray.forEach(element => {
+                if (element.index === index) {
+                    element.text = text;
+                    checkBool = true
+                }
+            })
+        }
+        if (checkBool) {
+            setInputConsist(consistArray)
+        }
+        else {
+            consistArray.push({ 'text': text, 'index': index });
+            setInputConsist(consistArray)
+        }
+    }
+
     // Flatlist Data 불러오기
     const onSave = () => {
         let edit = medicineBag !== null;
@@ -89,11 +115,12 @@ export default function AddNewMedicine({ navigation }) {
             medicineBag_ = medicineBag;
             medicineBag_['bagName'] = medicineBagname;
             medicineBag_['bagConsist'] = medicineConsist;
+            medicineBag_['bagTime'] = medicineTime;
             medicineBag_['bagStartDate'] = medicineStartDate;
             medicineBag_['bagEndDate'] = medicineEndDate;
 
         } else {
-            medicineBag_ = { "bagName": medicineBagname, "bagConsist": medicineConsist, "bagStartDate": medicineStartDate, "bagEndDate": medicineEndDate };
+            medicineBag_ = { "bagName": medicineBagname, "bagConsist": medicineConsist, "bagTime": medicineTime, "bagStartDate": medicineStartDate, "bagEndDate": medicineEndDate };
         }
         // AsyncStorage.getItem('medicineBags', (err, medicineBags) => {
         //     if (err) alert(err.message);
@@ -114,7 +141,7 @@ export default function AddNewMedicine({ navigation }) {
         //         });
         //     }
         // });
-        let url = "http://192.168.35.13:5001/medicineBag/add";
+        let url = "http://192.168.0.12:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
@@ -129,29 +156,68 @@ export default function AddNewMedicine({ navigation }) {
         //이게 원래 너 코드
         alert("약 추가 완료")
     };
-
+    const placeholder = {
+        label: '복약시간',
+        value: null,
+        color: '#9EA0A4',
+    };
     return (
         <KeyboardAvoidingView>
             <SafeAreaView>
+                <Card containerStyle={{
+                    marginTop: '7%', borderRadius: 7, shadowColor: "#000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 3.2
+                }}>
                     <View style={styles.container}>
-                        <TextInput
-                            onChangeText={(text) => setMedicineBagname(text)}
-                            placeholder={"약 봉투 이름"}
-                            autoFocus={true}
-                            style={{ borderWidth: 1, width: 100, paddingBottom: 2, marginBottom: 3 }}
-                            value={medicineBagname} />
-                        <TextInput
-                            onChangeText={(text) => setMedicineConsist(text)}
-                            style={{ borderWidth: 1, width: 100, paddingBottom: 2 }}
-                            autoFocus={true}
-                            placeholder={"약 구성"}
-                        value={medicineConsist} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10 }}>
+                            <Text style={{ fontSize: 20 }}>약 봉투 이름 </Text>
+                            <TextInput
+                                onChangeText={(text) => setMedicineBagname(text)}
+                                placeholder={"약 봉투 이름"}
+                                style={{ borderWidth: 1, width: 150, paddingBottom: 2, marginBottom: 3, marginLeft: 40 }}
+                                value={medicineBagname} />
+                        </View>
+                        {/*<View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10 }}>
+                            <Text style={{ fontSize: 20 }}>약 구성 1 </Text>
+                            <TextInput
+                                onChangeText={(text) => setMedicineConsist(text)}
+                                style={{ borderWidth: 1, width: 100, paddingBottom: 2, marginLeft: 65 }}
+                                placeholder={"약 구성 1"}
+                                value={medicineConsist} />
+
+
+            </View>*/}
+                        <Button title='Add' onPress={() => addInputText(textInput.length)} />
+
+                    </View>
+                    <Text style={{ fontSize: 20, marginLeft: 20, marginRight: 56 }}>복약 시간 </Text>
+                    <View style={{ width: '80%', marginLeft: 20 }}>
+                        <RNPickerSelect
+                            onValueChange={(value) => setMedicineTime(value)}
+                            placeholder={placeholder}
+                            items={[
+                                { label: '식전 30분', value: '식전 30분' },
+                                { label: '식후 30분', value: '식후 30분' },
+                                { label: '식전 1시간', value: '식전 1시간' },
+                                { label: '식후 1시간', value: '식후 1시간' },
+                            ]}
+                        />
+                    </View>
+                    <Text style={{ fontSize: 20, marginLeft: 20 }}>복약 기간 </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10, marginLeft: 10 }}>
+
+
+                        <Button buttonStyle={{ marginLeft: 10, width: 80, height: 30 }} type='clear' titleStyle={{ color: 'black', fontSize: 15 }} onPress={showStartDatepicker} title="시작 날짜" />
+                        <Button buttonStyle={{ marginLeft: 10, width: 80, height: 30 }} type='clear' titleStyle={{ color: 'black', fontSize: 15 }} onPress={showEndDatepicker} title="끝 날짜" />
+
                     </View>
 
-                    <Button buttonStyle={{ width: 100 }} titleStyle={{ color: 'black' }} type="outline" onPress={showStartDatepicker} title="시작 날짜" />
-                    <Button buttonStyle={{ width: 100 }} titleStyle={{ color: 'black' }} type="clear" onPress= {showTimepicker} title="시작 시간" />
-                    <Button buttonStyle={{ width: 100 }} titleStyle={{ color: 'black' }} type="clear" onPress={showEndDatepicker} title="끝 날짜" />
-                    <Button buttonStyle={{ width: 100 }} titleStyle={{ color: 'black' }} type="clear" onPress={showEndTimepicker} title="끝 시간" />
 
                     {startshow && (
                         <DateTimePicker
@@ -175,14 +241,38 @@ export default function AddNewMedicine({ navigation }) {
                             onChange={onEndChange}
                         />
                     )}
-                    <View style={{ marginLeft: 70 }}>
-                        <Button buttonStyle={{ width: 50, height: 30 }} title="저장" onPress={onSave} />
+                    <View style={{ marginLeft: 0 }}>
+                        <Button buttonStyle={{ height: 30, backgroundColor: '#FF5A5F' }} title="저장" onPress={onSave} />
                     </View>
+                </Card>
             </SafeAreaView>
         </KeyboardAvoidingView>
     )
 
 }
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 12,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 4,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+    inputAndroid: {
+        fontSize: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderWidth: 0.5,
+        borderColor: 'purple',
+        borderRadius: 8,
+        color: 'black',
+        paddingRight: 30, // to ensure the text is never behind the icon
+    },
+});
 
 const styles = {
     container: {

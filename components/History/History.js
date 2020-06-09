@@ -15,22 +15,21 @@ const History = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#F2F2F2'
   },
   title: {
     color: 'black',
-    fontSize: 30,
+    fontSize: 45,
     marginTop: 70,
     marginLeft: 20,
-    marginRight: 150,
-    paddingBottom: 20,
-    backgroundColor: /*'#FFE1E4'*/ '#FF5A5F'
-  },
+    marginRight: 100,
+    fontWeight : 'bold'
+},
   subtitle: {
     fontSize: 20,
     paddingTop: 25,
     marginLeft: 20,
-    paddingBottom: 3
+    paddingBottom: 8
   },
   search: {
     justifyContent: 'center',

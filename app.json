@@ -26,10 +26,13 @@
       "splash": {
         "dpi": "./assets/NewSplash.png",
         "resizeMode": "cover"
-      }
+      },
+      "package": "expo.eject.Medy"
     },
     "ios": {
-      "supportsTablet": true
-    }
+      "supportsTablet": true,
+      "bundleIdentifier": "Medy"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
