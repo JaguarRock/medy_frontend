@@ -56,7 +56,7 @@ export default function AddNewUser(props) {
         });
         */
        //console.log(navigation.addListener("MedicineScreen"));
-      let url = "http://192.168.0.16:5000/user/add";
+      let url = "http://172.30.120.1:5000/user/add";
        axios.post(url, user_)
            .then(res => res.data)
            .then((data) => {

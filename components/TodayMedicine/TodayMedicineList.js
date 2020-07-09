@@ -1,10 +1,19 @@
-import React from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { Card, Avatar, Button } from 'react-native-elements'
 import Count from './Count'
-import Count2 from './Count2'
-function TodayMedicineList({ item, navigation }) {
-    let a = 6;
+import moment from 'moment'
+
+function Time (){
+    
+    const [currenttime, setCurrentTime] = useState(null);
+    useEffect(()=> {setInterval(()=>{
+        setCurrentTime(moment().format());
+    }, 1000)})
+    console.log(currenttime)
+}
+
+function TodayMedicineList({ item }) {
     return (
         <ScrollView horizontal={true} style={{ scaleX: 1, paddingBottom: 20, }} showsHorizontalScrollIndicator={false}>
             <Card containerStyle={styles.cardstyle}>
@@ -18,9 +27,9 @@ function TodayMedicineList({ item, navigation }) {
                 <Text style={{ fontWeight: 'bold', fontSize: 20 }}></Text>
                 {/*<Button title="더보기" onPress={() => { navigation.navigate('HistoryItem', { bagName: item.bagName, bagConsist: item.bagConsist, bagStartDate : item.bagStartDate, bagEndDate : item.bagEndDate }) }} />*/}
                 <Text>남은 시간</Text>
-                {item.bagName === '고혈압' ?
-                    <Count /> : <Count2 />
-                }
+                {/*{time.slice(11,16) === dinner?
+                    <Count /> : <Text>none</Text>}
+                <Text>{time}</Text>*/}  
             </Card>
         </ScrollView>
     )

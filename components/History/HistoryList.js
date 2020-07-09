@@ -46,7 +46,7 @@ export default function HistoryList({ navigation }) {
         //     setIsFetching(false);
         // });
 
-        let url = "http://192.168.0.12:5001/medicineBag"
+        let url = "http://172.16.101.152:5001/medicineBag"
         axios.get(url)
             .then(res => res.data)
             .then((data) => { dispatch(getMedicineBags(data)) })
@@ -78,7 +78,7 @@ export default function HistoryList({ navigation }) {
         //         AsyncStorage.setItem('medicineBags', JSON.stringify(medicineBags), () => dispatch(deleteMedicineBag(id)));
         //     }
         // }}
-        let url = "http://192.168.0.12:5001/medicineBag/";
+        let url = "http://172.16.101.152:5001/medicineBag/";
         axios.delete(url + _id)
             .then((res) => dispatch(deleteMedicineBag(_id)))
             .catch(error => alert(error.message))

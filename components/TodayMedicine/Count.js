@@ -5,7 +5,7 @@ const Count = () => {
     return(
         <CountDown
         size={15}
-        until={18000}
+        until={3600}
         onFinish={() => alert('Finished')}
         digitStyle={{backgroundColor: '#FFF', borderWidth: 2, borderColor: 'white'}}
         digitTxtStyle={{color: '#000000', fontSize : 25}}
