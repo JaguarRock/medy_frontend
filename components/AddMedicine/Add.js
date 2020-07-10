@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native'
 import AddNewMedicine from './AddNewMedicine'
+import AddMedicine from './AddMedicine'
 import { Divider } from 'react-native-elements'
 const Add = ({ navigation }) => {
   return (
@@ -19,7 +20,8 @@ const Add = ({ navigation }) => {
         paddingBottom : -20,
         fontWeight: 'bold'
       }}>M E D I C I N E</Text>
-      <AddNewMedicine navigation={navigation} />
+      {/*<AddNewMedicine navigation={navigation} />*/}
+      <AddMedicine navigation={navigation} />
       {/*<Divider style={{ marginTop : 40,borderWidth: 0.7, width: '85%', marginLeft: 30 }} />*/}
       {/*<Text style={{
         fontSize: 45,

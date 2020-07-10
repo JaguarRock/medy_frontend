@@ -11,6 +11,10 @@ import { Button, Card } from "react-native-elements";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import DropDownPicker from 'react-native-dropdown-picker';
 import RNPickerSelect from 'react-native-picker-select';
+import DatePicker from 'react-native-date-ranges';
+import Dates from 'react-native-dates'
+
+import moment from 'moment'
 
 export default function AddNewMedicine({ navigation }) {
     const [medicineStartDate, setMedicineStartDate] = useState(new Date(1598051730000));
@@ -46,16 +50,8 @@ export default function AddNewMedicine({ navigation }) {
         showStartMode('date');
     };
 
-    const showTimepicker = () => {
-        showStartMode('time');
-    };
-
     const showEndDatepicker = () => {
         showEndMode('date');
-    };
-
-    const showEndTimepicker = () => {
-        showEndMode('time');
     };
 
     const dispatch = useDispatch();
@@ -65,47 +61,6 @@ export default function AddNewMedicine({ navigation }) {
     const [medicineBagname, setMedicineBagname] = useState(medicineBag ? medicineBag.bagName : "");
     const [medicineConsist, setMedicineConsist] = useState(medicineBag ? medicineBag.bagConsist : "");
     const [medicineTime, setMedicineTime] = useState(medicineBag ? medicineBag.bagTime : "");
-    
-    const [input, setInput] = useState({
-        textInput : [''],
-        inputConsist : ['']
-    })
-
-
-    const addInputText = (index) => {
-        let textInput = input.textInput
-        textArray.push(<TextInput onChange={(text) => addValues(text, index)} />)
-        setInput(textInput);
-    }
-    
-    const removeTextInput = () => {
-        let textInput = this.state.textInput;
-        let inputData = this.state.inputData;
-        textInput.pop();
-        inputData.pop();
-        this.setState({ textInput,inputData });
-      }
-    
-
-    const addValues = (text, index) => {
-        let consistArray = inputConsist
-        let checkBool = false;
-        if (consistArray.legth !== 0) {
-            consistArray.forEach(element => {
-                if (element.index === index) {
-                    element.text = text;
-                    checkBool = true
-                }
-            })
-        }
-        if (checkBool) {
-            setInputConsist(consistArray)
-        }
-        else {
-            consistArray.push({ 'text': text, 'index': index });
-            setInputConsist(consistArray)
-        }
-    }
 
     // Flatlist Data 불러오기
     const onSave = () => {
@@ -118,7 +73,6 @@ export default function AddNewMedicine({ navigation }) {
             medicineBag_['bagTime'] = medicineTime;
             medicineBag_['bagStartDate'] = medicineStartDate;
             medicineBag_['bagEndDate'] = medicineEndDate;
-
         } else {
             medicineBag_ = { "bagName": medicineBagname, "bagConsist": medicineConsist, "bagTime": medicineTime, "bagStartDate": medicineStartDate, "bagEndDate": medicineEndDate };
         }
@@ -141,7 +95,7 @@ export default function AddNewMedicine({ navigation }) {
         //         });
         //     }
         // });
-        let url = "http://192.168.0.12:5001/medicineBag/add";
+        let url = "http://192.168.0.16:5001/medicineBag/add";
         axios.post(url, medicineBag_)
             .then(res => res.data)
             .then((data) => {
@@ -183,7 +137,7 @@ export default function AddNewMedicine({ navigation }) {
                                 style={{ borderWidth: 1, width: 150, paddingBottom: 2, marginBottom: 3, marginLeft: 40 }}
                                 value={medicineBagname} />
                         </View>
-                        {/*<View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', paddingBottom: 10 }}>
                             <Text style={{ fontSize: 20 }}>약 구성 1 </Text>
                             <TextInput
                                 onChangeText={(text) => setMedicineConsist(text)}
@@ -192,8 +146,7 @@ export default function AddNewMedicine({ navigation }) {
                                 value={medicineConsist} />
 
 
-            </View>*/}
-                        <Button title='Add' onPress={() => addInputText(textInput.length)} />
+                        </View>
 
                     </View>
                     <Text style={{ fontSize: 20, marginLeft: 20, marginRight: 56 }}>복약 시간 </Text>
@@ -245,6 +198,21 @@ export default function AddNewMedicine({ navigation }) {
                         <Button buttonStyle={{ height: 30, backgroundColor: '#FF5A5F' }} title="저장" onPress={onSave} />
                     </View>
                 </Card>
+                <DatePicker
+    style={ { width: 350, height: 45 } }
+    customStyles = { {
+        placeholderText:{ fontSize:20 }, // placeHolder style
+        headerStyle : {  },			// title container style
+        headerMarkTitle : { }, // title mark style 
+        headerDateTitle: { }, // title Date style
+        contentInput: {}, //content text container style
+        contentText: {}, //after selected text Style
+    } } // optional 
+    centerAlign // optional text will align center or not
+    allowFontScaling = {false} // optional
+    placeholder={'Apr 27, 2018 → Jul 10, 2018'}
+    mode={'range'}
+/>
             </SafeAreaView>
         </KeyboardAvoidingView>
     )
