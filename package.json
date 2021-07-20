@@ -36,7 +36,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-moment": "^0.9.7",
-    "react-native": "~0.61.5",
+    "react-native": "~0.62.3",
     "react-native-calendario": "^2.1.0",
     "react-native-countdown-component": "^2.7.1",
     "react-native-date-ranges": "^2.5.0",
